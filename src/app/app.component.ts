@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   todos: Todo[] = []
   todoTitle = ''
   loading = false
+  error = ''
 
   constructor(private todosService: TodosService) {
   }
@@ -30,12 +31,9 @@ export class AppComponent implements OnInit {
     }
     this.todosService.addTodo(newTodo)
       .subscribe(response => {
-        console.log('response', response)
         this.todos.push(response)
         this.todoTitle = ''
-      })
-
-
+      } )
   }
 
   fetchTodos() {
@@ -45,8 +43,7 @@ export class AppComponent implements OnInit {
       .subscribe(response => {
         this.todos = response
         this.loading = false
-      })
-  }
+      },error => this.error = error.message)  }
 
   removeTodo(id: number) {
     this.todosService.removeTodo(id)

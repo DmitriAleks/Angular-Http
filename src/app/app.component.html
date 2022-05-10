@@ -9,6 +9,8 @@
     <button class="btn" (click)="fetchTodos()">Загрузить</button>
   </div>
 
+<p *ngIf="error" [class.error]="error">{{error}}</p>
+
   <hr>
   <div *ngIf="!loading; else loadingBlock">
     <div *ngIf="todos.length; else noTodos">
